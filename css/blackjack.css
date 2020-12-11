@@ -39,10 +39,13 @@ body {
     display: block;
     font-size: 16px;
     margin-bottom: 8px;
+    font-weight: bold;
 }
 
 .points {
     font-style: italic;
+    font-weight: bold;
+
 }
 
 .hand {

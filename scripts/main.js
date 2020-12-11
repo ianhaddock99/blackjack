@@ -227,4 +227,4 @@ let reset = document.querySelector("#reset-button");
   })
 
 
-  // A pair of aces gives the blackjack player a starting hand value of either a 2 or a soft 12 which is a problematic starting hand in either case. Splitting aces gives a player two chances to hit 21
+  // Aces can have a value of either 1 or 11. The Ace is always valued at 11 unless that would result in the hand going over 21, in which case it is valued as 1.
