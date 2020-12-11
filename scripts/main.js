@@ -106,9 +106,6 @@ hit.addEventListener('click', () => {
       } else {
         dealerHand.push(card);
       }
-      if(playerScore === 21){
-        document.getElementById("messages2").innerHTML = "You have 21, you win!";
-      }
       let displayCard = document.createElement('img'); // <img src='' />
       displayCard.src = card.Img;
       document.getElementById(player).appendChild(displayCard);
@@ -120,10 +117,6 @@ hit.addEventListener('click', () => {
   bust()
   console.log(playerScore);
   console.log(dealerScore);
-
-
-
-  
 })
   // for (x = 0; x < 2; x++) {
   //   let card = deck.pop();
@@ -151,7 +144,7 @@ function calculatePoints() {
   }
 }
 
-////////BUST///////////////////////////////////
+////////BUST AND 21 HIT WIN///////////////////////////////////
 
 function bust(){
   if (playerScore > 21){
@@ -160,8 +153,14 @@ function bust(){
     hit.disabled = true;
     stand.disabled = true;
   }
-  if (dealerScore > 21){
+  else if (dealerScore > 21){
     document.getElementById("messages").innerHTML = "Dealer has busted, you win!";
+    deal.disabled = true;
+    hit.disabled = true;
+    stand.disabled = true;
+  }
+  else if (playerScore === 21){
+    document.getElementById("messages2").innerHTML = "You have 21, you win!";
     deal.disabled = true;
     hit.disabled = true;
     stand.disabled = true;
