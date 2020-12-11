@@ -210,7 +210,21 @@ function winner(){
     hit.disabled = true;
     stand.disabled = true;
   }
-
+  else if(playerScore === dealerScore){
+    document.getElementById("messages").innerHTML = "Tie game, no one wins!";
+    deal.disabled = true;
+    hit.disabled = true;
+    stand.disabled = true;
+  }
 }
 
 
+///////////////////////RESET GAME/////////////////////////
+
+let reset = document.querySelector("#reset-button");
+  reset.addEventListener('click', () =>{
+    window.location.reload();
+  })
+
+
+  // A pair of aces gives the blackjack player a starting hand value of either a 2 or a soft 12 which is a problematic starting hand in either case. Splitting aces gives a player two chances to hit 21
