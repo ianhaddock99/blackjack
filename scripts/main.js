@@ -70,9 +70,15 @@ deal.addEventListener('click', () => {
       } else {
         dealerHand.push(card);
       }
+      if(playerScore === 21){
+        document.getElementById("messages2").innerHTML = "You have 21, you win!";
+        hit.disabled = true;
+        stand.disabled = true;
+      }
       let displayCard = document.createElement('img'); // <img src='' />
       displayCard.src = card.Img;
       document.getElementById(player).appendChild(displayCard);
+      calculatePoints()
     }
   }
   
@@ -80,7 +86,7 @@ deal.addEventListener('click', () => {
   dealCard(players[0])
   dealCard(players[1])
   deal.disabled = true;
-  calculatePoints()
+  
   console.log(playerScore);
   console.log(dealerScore);
 })
@@ -100,15 +106,17 @@ hit.addEventListener('click', () => {
       } else {
         dealerHand.push(card);
       }
+      if(playerScore === 21){
+        document.getElementById("messages2").innerHTML = "You have 21, you win!";
+      }
       let displayCard = document.createElement('img'); // <img src='' />
       displayCard.src = card.Img;
       document.getElementById(player).appendChild(displayCard);
+      calculatePoints()
     }
   }
 
   hitCard(players[0])
-  
-  calculatePoints()
   bust()
   console.log(playerScore);
   console.log(dealerScore);
@@ -147,10 +155,16 @@ function calculatePoints() {
 
 function bust(){
   if (playerScore > 21){
-    document.getElementById("messages").innerHTML = "You have busted";
+    document.getElementById("messages").innerHTML = "You have busted, dealer wins!";
+    deal.disabled = true;
+    hit.disabled = true;
+    stand.disabled = true;
   }
   if (dealerScore > 21){
-    document.getElementById("messages").innerHTML = "Dealer has busted";
+    document.getElementById("messages").innerHTML = "Dealer has busted, you win!";
+    deal.disabled = true;
+    hit.disabled = true;
+    stand.disabled = true;
   }
 }
 
@@ -165,7 +179,7 @@ stand.addEventListener('click', () => {
     while(dealerScore <= 21) {
       let card = deck.pop();
       dealerHand.push(card);
-      if(dealerScore >= 17 && dealerScore < 21){
+      if(dealerScore >= 17 && dealerScore <= 21){
       break;
       }
       let displayCard = document.createElement('img'); // <img src='' />
@@ -177,10 +191,27 @@ stand.addEventListener('click', () => {
 
   standCard(players[0])
   bust()
+  winner()
   console.log(playerScore);
   console.log(dealerScore);
 
 })
 
+///////////////////DETERMINE WINNER////////////////////
+function winner(){
+  if(dealerScore <= 21 && dealerScore > playerScore ){
+    document.getElementById("messages").innerHTML = "Dealer has higher score, you lose!";
+    deal.disabled = true;
+    hit.disabled = true;
+    stand.disabled = true;
+  } 
+  else if(playerScore <= 21 && playerScore > dealerScore){
+    document.getElementById("messages").innerHTML = "You have the higher score, dealer loses!";
+    deal.disabled = true;
+    hit.disabled = true;
+    stand.disabled = true;
+  }
+
+}
 
 
