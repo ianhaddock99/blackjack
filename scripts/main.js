@@ -1,5 +1,4 @@
 
-
 var suits = ["hearts","clubs","diamonds",'spades'];
 var ranks = ["2","3","4","5","6","7","8","9","10","jack","queen","king","ace"]
 var deck = [];
@@ -12,7 +11,6 @@ var playerTurn = false;
 //////////////////////////CREATING A DECK/////////////////////////
 function newDeck(){
 
-  
   for(let suitCounter = 0; suitCounter < suits.length; suitCounter++){
 
     for(let rankCounter = 0; rankCounter < ranks.length; rankCounter++){
@@ -29,10 +27,11 @@ function newDeck(){
       let card = {Rank: weight, Suit: suits[suitCounter], Img: `./images/${ranks[rankCounter]}_of_${suits[suitCounter]}.png`};
       deck.push(card);
     }
-
+    
   }
 
   return deck;
+  
 }
 
 newDeck();
@@ -117,30 +116,36 @@ hit.addEventListener('click', () => {
   bust()
   console.log(playerScore);
   console.log(dealerScore);
+
 })
-  // for (x = 0; x < 2; x++) {
-  //   let card = deck.pop();
-  //   let displayCard = document.createElement('img'); // <img src='' />
-  //   displayCard.src = card.Img;
-  //   if (x === 0) {
-  //     document.getElementById("player-hand").appendChild(displayCard);
-  //   } else {
-  //     document.getElementById("dealer-hand").appendChild(displayCard);
-  //   }
-  // }
+
 
 //////////////////////////////////////CALCULATE POINTS, PRINT SCORE TO///////////////////
 function calculatePoints() {
   playerScore = 0;
   dealerScore = 0;
   for (let i = 0; i < playerHand.length; i += 1) {
+    if(playerHand[i].Rank === 11){
+      if(playerScore >= 11){
+        playerScore += 1
+        document.getElementById("player-points").innerHTML = playerScore;
+        continue;
+      }
+    }
     playerScore += playerHand[i].Rank;
     document.getElementById("player-points").innerHTML = playerScore;
-
   }
   for (let i = 0; i < dealerHand.length; i += 1) {
+    if(dealerHand[i].Rank === 11){
+      if(dealerScore >= 11){
+        dealerScore += 1
+        document.getElementById("dealer-points").innerHTML = dealerScore;
+        continue;
+      }
+    }
     dealerScore += dealerHand[i].Rank;
     document.getElementById("dealer-points").innerHTML = dealerScore;
+
   }
 }
 
@@ -160,7 +165,7 @@ function bust(){
     stand.disabled = true;
   }
   else if (playerScore === 21){
-    document.getElementById("messages2").innerHTML = "You have 21, you win!";
+    document.getElementById("messages").innerHTML = "You have 21, you win!";
     deal.disabled = true;
     hit.disabled = true;
     stand.disabled = true;
@@ -171,15 +176,15 @@ function bust(){
 let stand = document.querySelector('#stand-button')
 
 stand.addEventListener('click', () => {
-
+  
   let players = ["dealer-hand"];
-
+  
   function standCard(player) {
     while(dealerScore <= 21) {
       let card = deck.pop();
       dealerHand.push(card);
       if(dealerScore >= 17 && dealerScore <= 21){
-      break;
+        break;
       }
       let displayCard = document.createElement('img'); // <img src='' />
       displayCard.src = card.Img;
@@ -187,13 +192,13 @@ stand.addEventListener('click', () => {
       calculatePoints()
     }
   }
-
+  
   standCard(players[0])
   bust()
   winner()
   console.log(playerScore);
   console.log(dealerScore);
-
+  
 })
 
 ///////////////////DETERMINE WINNER////////////////////
@@ -222,9 +227,25 @@ function winner(){
 ///////////////////////RESET GAME/////////////////////////
 
 let reset = document.querySelector("#reset-button");
-  reset.addEventListener('click', () =>{
+reset.addEventListener('click', () =>{
     window.location.reload();
   })
-
-
+  
+  
   // Aces can have a value of either 1 or 11. The Ace is always valued at 11 unless that would result in the hand going over 21, in which case it is valued as 1.
+  
+  
+  
+  
+  
+  //hit
+  // for (x = 0; x < 2; x++) {
+  //   let card = deck.pop();
+  //   let displayCard = document.createElement('img'); // <img src='' />
+  //   displayCard.src = card.Img;
+  //   if (x === 0) {
+  //     document.getElementById("player-hand").appendChild(displayCard);
+  //   } else {
+  //     document.getElementById("dealer-hand").appendChild(displayCard);
+  //   }
+  // }
