@@ -1,5 +1,5 @@
 body {
-    font-family: 'Permanent Marker', cursive;
+    font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
     background-size: contain;
 }
@@ -13,10 +13,11 @@ body {
     max-width: calc(100% - 20px);
     margin: 0 auto 10px;
     height: 1em;
-    font-size: 40px;
+    font-size: 50px;
     padding-top: 40px;
     color: red;
     text-align: center;
+    font-weight: bold;
 }
 
 .message-box.error {
@@ -26,7 +27,7 @@ body {
 .table {
     width: 900px;
     max-width: calc(100% - 20px);
-    border: 8px solid rgb(10, 43, 2);
+    
     border-radius: 20px;
     background: rgb(22, 77, 8);
     margin: 0 auto;
